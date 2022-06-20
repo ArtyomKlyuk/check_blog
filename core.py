@@ -34,7 +34,7 @@ class MyBlog:
 
         ws[f"C1"] = 'Может писать в блог ?'
         count_of_orgs = 28059
-        begin_of_read = 1
+        begin_of_read = 2
         for i in range(begin_of_read, count_of_orgs + 2):
             org_id = ws[f'A{i}'].value
             print(f"A{i}", org_id)
@@ -43,7 +43,7 @@ class MyBlog:
             except Exception as ex:
                 ws[f'C{org_id}'] = 'Не открылось'
                 continue
-            time.sleep(2)
+            # time.sleep(2)
             try:
                 # driver.find_element(By.CSS_SELECTOR, ".ant-btn.ant-btn-primary").click()
                 time.sleep(3)
@@ -60,6 +60,8 @@ class MyBlog:
                 print(ex)
                 print("Нет блога!")
                 ws[f"C{i}"] = "Нет"
+            if i % 100 == 0:
+                wb.save(source)
 
         wb.save(source)
         driver.quit()
